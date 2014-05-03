@@ -6,7 +6,7 @@ dataForF=[];
 dataForF.push(new dataOb('alive'));
 dataForF.push(new dataOb('dead'));
 for (var i = 0; i < 17; i++) {
-//dataForF.push(new dataOb(i));	
+dataForF.push(new dataOb(i.toString()));	
 };
 var legendCenterificator=function(){
 	$('legend').each(function(i){
@@ -117,5 +117,43 @@ $(document).ready(function(){
 	legendCenterificator();
 });
 
+$('#searchInput').keyup(function(){
+	if($('#searchInput').val().length>0){
+	seacrhModeInit();
+	}else{
+	seacrhModeEnd();
+	}
+});
+
+var createFieldsetSearch=function(da,i){
+	var returning;
+	returning='<fieldset class="fieldDefaultMode" id="fldset'+i+'">';
+	returning+='<legend><span>'+da.title+'</span><input dataRel="title" type="text" value="'+da.title+'"/></legend>';
+	returning+='<div class="buttonDiv"><button type="button" onclick="editFieldSet($(this),$(this).attr(\'state\'))" state="nonEdit">Edit</button>';
+	returning+='<button type="button" onclick="cancelEdit($(this))" class="cancelButton">Cancel</button>';
+	returning+='<button type="button" onclick="deleteThis($(this))" class="deleteButton">Delete</button><div>'
+	returning+='<div style="clear:both"></div></fieldset>';
+	//$('#fieldHolder').append(returning);
+	$(returning).insertBefore('#addNewButton');
+}
+function seacrhModeInit(){
+	$('.fieldDefaultMode').hide();
+	$('#addNewButton').hide();
+	$('.fieldEditMode').each(function(i){
+		cancelEdit($(this).find('.cancelButton'));
+	});
+for (var i = 0; i <dataForF.length; i++) {
+		if(dataForF[i].title.indexOf($('#searchInput').val())!=-1){
+		$('#fldset'+i).show();
+	}
+};
+
+//if(!$('#addNewButton').is(":visible"))	
+}
+function seacrhModeEnd(){
+$('.fieldDefaultMode').show();
+if(dataForF.length<20)
+$('#addNewButton').show();
+}
 
 

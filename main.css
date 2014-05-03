@@ -57,6 +57,25 @@ fieldset div{
 };
 
 
+// search mode
+.searchFieldset{
+	
+}
+.searchFieldset legend span{
+	display: initial;
+}
+
+.searchFieldset legend input{
+	display: none;
+}
+.searchFieldset .cancelButton{
+	display: none;
+}
+.searchFieldset .deleteButton{
+	display: inline;
+}
+
+
 
 .tempFieldset{
 	display: none;
@@ -64,6 +83,8 @@ fieldset div{
 .tempFieldset{
 	display: none;
 }
+
+
 
 #fieldHolder{
 	width: 1100px;
@@ -74,7 +95,7 @@ fieldset div{
 	height:80%;
 	margin-top: 2%;
 	padding: 25px;
-	//position: fixed;
+	position: relative;
 }
 legend span{
 	font-style: italic;
@@ -100,5 +121,8 @@ legend span{
 	border-radius: 10px;
 	
 }
-
-
+#searchInput{
+position: absolute;
+right:50px;
+top:20px;
+}
