@@ -26,8 +26,9 @@ var create_fieldset=function(){
 var createFieldset=function(da,i){
 	var returning;
 	returning='<fieldset class="fieldDefaultMode" id="fldset'+i+'">';
-	returning+='<legend><span>'+da.title+'</span><input dataRel="title" type="text" value="'+da.title+'"/></legend>';
-	returning+='<div class="buttonDiv"><button type="button" onclick="editFieldSet($(this),$(this).attr(\'state\'))" state="nonEdit">Edit</button>';
+	returning+='<legend><span class="titleSpan">'+da.title+'</span><input dataRel="title" type="text" value="'+da.title+'"/>';
+	returning+='<div class="searchDeco" ></div>';
+	returning+='</legend><div class="buttonDiv"><button type="button" onclick="editFieldSet($(this),$(this).attr(\'state\'))" state="nonEdit">Edit</button>';
 	returning+='<button type="button" onclick="cancelEdit($(this))" class="cancelButton">Cancel</button>';
 	returning+='<button type="button" onclick="deleteThis($(this))" class="deleteButton">Delete</button><div>'
 	returning+='<div style="clear:both"></div></fieldset>';
@@ -125,26 +126,23 @@ $('#searchInput').keyup(function(){
 	}
 });
 
-var createFieldsetSearch=function(da,i){
-	var returning;
-	returning='<fieldset class="fieldDefaultMode" id="fldset'+i+'">';
-	returning+='<legend><span>'+da.title+'</span><input dataRel="title" type="text" value="'+da.title+'"/></legend>';
-	returning+='<div class="buttonDiv"><button type="button" onclick="editFieldSet($(this),$(this).attr(\'state\'))" state="nonEdit">Edit</button>';
-	returning+='<button type="button" onclick="cancelEdit($(this))" class="cancelButton">Cancel</button>';
-	returning+='<button type="button" onclick="deleteThis($(this))" class="deleteButton">Delete</button><div>'
-	returning+='<div style="clear:both"></div></fieldset>';
-	//$('#fieldHolder').append(returning);
-	$(returning).insertBefore('#addNewButton');
-}
+
 function seacrhModeInit(){
 	$('.fieldDefaultMode').hide();
 	$('#addNewButton').hide();
 	$('.fieldEditMode').each(function(i){
 		cancelEdit($(this).find('.cancelButton'));
 	});
+	$('.titleSpan').hide();
+	$('.searchDeco').show();
 for (var i = 0; i <dataForF.length; i++) {
 		if(dataForF[i].title.indexOf($('#searchInput').val())!=-1){
 		$('#fldset'+i).show();
+		var labelCrVar=$('#fldset'+i).find('.titleSpan').html();
+		console.log(labelCrVar);
+		labelCrVar='<label>'+labelCrVar.substring(0,labelCrVar.indexOf($('#searchInput').val()))+'</label><label class="searchHighlight">'+labelCrVar.substring(labelCrVar.indexOf($('#searchInput').val()),labelCrVar.indexOf($('#searchInput').val())+$('#searchInput').val().length)+'</label><label>'+labelCrVar.substring(labelCrVar.indexOf($('#searchInput').val())+$('#searchInput').val().length,labelCrVar.length)+'</label>';
+
+		$('#fldset'+i).find('.searchDeco').html(labelCrVar);
 	}
 };
 
@@ -154,6 +152,8 @@ function seacrhModeEnd(){
 $('.fieldDefaultMode').show();
 if(dataForF.length<20)
 $('#addNewButton').show();
+$('.titleSpan').show();
+$('.searchDeco').hide();
 }
 
 

@@ -27,7 +27,7 @@ fieldset div{
 	
 }
 //defaultmode
-.fieldEditMode legend span{
+.fieldDefaultMode legend span{
 	display: initial;
 }
 
@@ -58,21 +58,8 @@ fieldset div{
 
 
 // search mode
-.searchFieldset{
-	
-}
-.searchFieldset legend span{
-	display: initial;
-}
-
-.searchFieldset legend input{
+.searchDeco{
 	display: none;
-}
-.searchFieldset .cancelButton{
-	display: none;
-}
-.searchFieldset .deleteButton{
-	display: inline;
 }
 
 
@@ -125,4 +112,15 @@ legend span{
 position: absolute;
 right:50px;
 top:20px;
+}
+.searchHighlight{
+background-color: beige;
+border: 1px solid lightgrey;
+box-shadow: 1px 1px 1px slategrey;
+font-style: italic;
+color: slateblue;
+}
+
+.searchDeco{
+
 }
